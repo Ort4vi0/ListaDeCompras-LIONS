@@ -123,6 +123,10 @@
                 <i data-lucide="shopping-cart" class="w-4 h-4"></i>
                 <span>Ir às Compras</span>
             </button>
+            
+            <button id="share-btn" class="hidden p-2 rounded-full text-slate-500 hover:bg-slate-100 transition-colors" title="Compartilhar no WhatsApp">
+                <i data-lucide="share-2" class="w-5 h-5"></i>
+            </button>
         </div>
     </header>
 
@@ -184,57 +188,23 @@
         <!-- COLUNA DIREITA: Lista -->
         <section id="main-section" class="lg:col-span-8 transition-all duration-500">
             
-            <!-- Formulário de Adição -->
-            <div id="add-form" class="bg-white p-3 rounded-2xl shadow-sm border border-slate-100 mb-6 fade-in transition-colors duration-500">
-                <div class="flex flex-col lg:flex-row gap-3">
-                    <!-- Name Input Group -->
-                    <div class="relative w-full lg:flex-1 group">
-                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                            <i data-lucide="search" class="h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
-                        </div>
-                        <input type="text" id="input-name" placeholder="Adicionar novo item..." class="w-full h-12 pl-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-sm transition-all font-medium" autocomplete="off">
-                        <!-- Custom Suggestions Dropdown -->
-                        <div id="suggestions-dropdown" class="hidden absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-30 max-h-60 overflow-y-auto">
-                            <!-- Suggestions injected via JS -->
-                        </div>
+            <!-- Action Bar (Search) -->
+            <div id="action-bar" class="mb-4 fade-in transition-colors duration-500">
+                <div class="relative w-full group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
                     </div>
-
-                    <!-- Secondary Fields Row -->
-                    <div class="grid grid-cols-12 gap-2 lg:flex lg:w-auto lg:gap-3">
-                        <!-- Category -->
-                        <div class="col-span-5 lg:w-40 relative h-12" id="category-dropdown-container">
-                            <button id="category-dropdown-btn" class="w-full h-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium">
-                                <span id="selected-category-display" class="truncate">Geral</span>
-                                <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 flex-shrink-0 ml-1"></i>
-                            </button>
-                            <div id="category-dropdown-menu" class="hidden absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto">
-                                <!-- Options injected via JS -->
-                            </div>
-                        </div>
-                        <input type="hidden" id="input-category" value="Geral">
-
-                        <!-- Quantity -->
-                        <div class="col-span-2 lg:w-20 relative h-12">
-                            <input type="number" id="input-quantity" placeholder="1" min="1" class="w-full h-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-center text-sm font-medium transition-all px-0" title="Quantidade">
-                            <span class="absolute right-1 top-1 lg:right-2 lg:top-1/2 lg:-translate-y-1/2 text-[9px] lg:text-[10px] text-slate-400 font-bold uppercase pointer-events-none">Qtd</span>
-                        </div>
-
-                        <!-- Price -->
-                        <div class="col-span-3 lg:w-32 relative h-12">
-                            <span class="absolute left-2 lg:left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs lg:text-sm font-medium">R$</span>
-                            <input type="number" id="input-price" placeholder="0.00" class="w-full h-full pl-7 lg:pl-10 pr-1 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-sm font-medium transition-all">
-                        </div>
-
-                        <!-- Add Button -->
-                        <button id="add-btn" class="col-span-2 lg:w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl flex items-center justify-center transition-all shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:scale-105 active:scale-95">
-                            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6"></i>
-                        </button>
-                    </div>
+                    <input type="text" id="search-input" placeholder="Buscar na lista..." class="w-full h-12 pl-10 bg-white border border-slate-100 focus:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-sm transition-all font-medium shadow-sm" autocomplete="off">
                 </div>
             </div>
 
-            <!-- Controles da Lista -->
-            <div class="flex justify-end mb-4 px-2">
+            <!-- Controles da Lista (Add + Sort) -->
+            <div class="flex justify-between items-center mb-6 px-1">
+                <button id="open-add-modal-btn" class="h-10 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-indigo-200 hover:shadow-indigo-300 hover:scale-105 active:scale-95">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span class="font-medium text-sm">Adicionar Item</span>
+                </button>
+
                 <div class="relative w-48" id="sort-dropdown-container">
                     <button id="sort-dropdown-btn" onclick="toggleSortDropdown()" class="w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-4 text-sm text-slate-600 flex items-center justify-between transition-all">
                         <span id="selected-sort-display" class="truncate">Ordem Padrão</span>
@@ -300,16 +270,34 @@
                     <input type="text" id="edit-name-input" class="w-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-4 py-2 text-sm transition-all">
                 </div>
                 
-                <div>
+                <div class="relative" id="edit-category-dropdown-container">
                     <label class="block text-xs font-medium text-slate-500 mb-1">Categoria</label>
-                    <select id="edit-category-select" class="w-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-4 py-2 text-sm transition-all">
-                        <!-- Options populated via JS -->
-                    </select>
+                    <button id="edit-category-dropdown-btn" class="w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium">
+                        <span id="edit-selected-category-display" class="truncate">Geral</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 flex-shrink-0 ml-1"></i>
+                    </button>
+                    <div id="edit-category-dropdown-menu" class="hidden absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto">
+                        <!-- Options injected via JS -->
+                    </div>
+                    <input type="hidden" id="edit-category-select" value="Geral">
                 </div>
 
                 <div>
                     <label class="block text-xs font-medium text-slate-500 mb-1">Quantidade</label>
-                    <input type="number" id="edit-quantity-input" min="1" class="w-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-4 py-2 text-sm transition-all">
+                    <div class="flex gap-2">
+                        <input type="number" id="edit-quantity-input" min="1" class="w-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-4 py-2 text-sm transition-all">
+                        
+                        <div class="relative w-24" id="edit-unit-dropdown-container">
+                            <button id="edit-unit-dropdown-btn" class="w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-2 text-sm text-slate-600 flex items-center justify-between transition-all font-medium">
+                                <span id="edit-selected-unit-display" class="truncate w-full text-center">un</span>
+                                <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 flex-shrink-0 absolute right-2 pointer-events-none"></i>
+                            </button>
+                            <div id="edit-unit-dropdown-menu" class="hidden absolute top-full right-0 w-24 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto">
+                                <!-- Options injected via JS -->
+                            </div>
+                            <input type="hidden" id="edit-unit-input" value="un">
+                        </div>
+                    </div>
                 </div>
 
                 <div>
@@ -562,7 +550,23 @@
                     <div class="p-2 bg-emerald-100 text-emerald-600 rounded-lg h-fit"><i data-lucide="plus-circle" class="w-5 h-5"></i></div>
                     <div>
                         <h4 class="font-bold text-slate-800 mb-1 tutorial-heading">Adicionar Itens</h4>
-                        <p>Digite o nome do produto. O sistema aprenderá seus preços e sugerirá itens conforme você digita. Pressione <kbd class="px-1 py-0.5 rounded bg-slate-200 text-slate-600 text-xs font-mono">Enter</kbd> para adicionar rapidamente.</p>
+                        <p>Digite o nome, preço e quantidade. Você pode selecionar a unidade de medida (kg, g, L, etc) ao lado da quantidade.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <div class="p-2 bg-blue-100 text-blue-600 rounded-lg h-fit"><i data-lucide="arrow-up-down" class="w-5 h-5"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-1 tutorial-heading">Organizar Corredores</h4>
+                        <p>Use as setas <i data-lucide="arrow-up" class="w-3 h-3 inline"></i> e <i data-lucide="arrow-down" class="w-3 h-3 inline"></i> ao lado do nome da categoria na lista para reordená-las conforme a disposição do seu supermercado.</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-3">
+                    <div class="p-2 bg-green-100 text-green-600 rounded-lg h-fit"><i data-lucide="share-2" class="w-5 h-5"></i></div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 mb-1 tutorial-heading">Compartilhar</h4>
+                        <p>Clique no ícone de compartilhar no topo para enviar sua lista pendente via WhatsApp para alguém.</p>
                     </div>
                 </div>
 
@@ -585,6 +589,78 @@
             
             <div class="mt-6 pt-4 border-t border-slate-100 flex justify-end">
                 <button id="ok-tutorial-btn" class="px-6 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-colors">Entendi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Adicionar Item -->
+    <div id="add-item-modal" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in">
+        <div id="add-item-modal-content" class="bg-white p-6 rounded-2xl shadow-xl max-w-sm w-full mx-4 border border-slate-100 transition-colors duration-500">
+            <h3 id="add-item-modal-title" class="text-lg font-bold text-slate-800 mb-4 transition-colors">Adicionar Item</h3>
+            
+            <div class="space-y-4 mb-6">
+                <!-- Name Input Group -->
+                <div class="relative w-full group">
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Nome</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i data-lucide="search" class="h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                        </div>
+                        <input type="text" id="input-name" placeholder="Ex: Leite" class="w-full h-10 pl-9 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm transition-all font-medium" autocomplete="off">
+                    </div>
+                    <!-- Custom Suggestions Dropdown -->
+                    <div id="suggestions-dropdown" class="hidden absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-30 max-h-60 overflow-y-auto">
+                        <!-- Suggestions injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div class="relative" id="category-dropdown-container">
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Categoria</label>
+                    <button id="category-dropdown-btn" class="w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium">
+                        <span id="selected-category-display" class="truncate">Geral</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 flex-shrink-0 ml-1"></i>
+                    </button>
+                    <div id="category-dropdown-menu" class="hidden absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto">
+                        <!-- Options injected via JS -->
+                    </div>
+                    <input type="hidden" id="input-category" value="Geral">
+                </div>
+
+                <!-- Quantity & Unit -->
+                <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Quantidade</label>
+                    <div class="flex gap-2">
+                        <input type="number" id="input-quantity" placeholder="1" min="1" class="w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-3 text-sm font-medium transition-all">
+                        <div class="relative w-24" id="unit-dropdown-container">
+                            <button id="unit-dropdown-btn" class="w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-2 text-sm text-slate-600 flex items-center justify-between transition-all font-medium">
+                                <span id="selected-unit-display" class="truncate w-full text-center">un</span>
+                                <i data-lucide="chevron-down" class="w-3 h-3 text-slate-400 flex-shrink-0 absolute right-2 pointer-events-none"></i>
+                            </button>
+                            <div id="unit-dropdown-menu" class="hidden absolute top-full right-0 w-24 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto">
+                                <!-- Options injected via JS -->
+                            </div>
+                            <input type="hidden" id="input-unit" value="un">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Preço (Opcional)</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-medium">R$</span>
+                        <input type="number" id="input-price" placeholder="0.00" class="w-full h-10 pl-8 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm font-medium transition-all">
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button id="cancel-add-btn" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-medium transition-colors">Cancelar</button>
+                <button id="add-btn" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-colors flex items-center gap-2">
+                    <i data-lucide="plus" class="w-4 h-4"></i>
+                    <span>Adicionar</span>
+                </button>
             </div>
         </div>
     </div>
@@ -618,7 +694,8 @@
             budgetTitle: 'Orçamento Semanal',
             items: [],
             categories: ['Geral'],
-            products: [] // Cache for suggestions
+            products: [], // Cache for suggestions
+            searchTerm: '' // New search term state
         };
 
         // --- CAMADA DE SERVIÇO DE API (REAL) ---
@@ -777,6 +854,10 @@
             selectedCategoryDisplay: document.getElementById('selected-category-display'),
             inputPrice: document.getElementById('input-price'),
             inputQuantity: document.getElementById('input-quantity'),
+            inputUnit: document.getElementById('input-unit'),
+            unitDropdownBtn: document.getElementById('unit-dropdown-btn'),
+            unitDropdownMenu: document.getElementById('unit-dropdown-menu'),
+            selectedUnitDisplay: document.getElementById('selected-unit-display'),
             addBtn: document.getElementById('add-btn'),
             // Displays
             budgetDisplay: document.getElementById('budget-display'),
@@ -799,14 +880,32 @@
             deleteModalText: document.getElementById('delete-modal-text'),
             cancelDeleteBtn: document.getElementById('cancel-delete-btn'),
             confirmDeleteBtn: document.getElementById('confirm-delete-btn'),
-            // Modal Edit
+            // Add Item Modal
+            addItemModal: document.getElementById('add-item-modal'),
+            addItemModalContent: document.getElementById('add-item-modal-content'),
+            addItemModalTitle: document.getElementById('add-item-modal-title'),
+            cancelAddBtn: document.getElementById('cancel-add-btn'),
+            // confirmAddBtn is dom.addBtn (reused ID)
+            openAddModalBtn: document.getElementById('open-add-modal-btn'),
+            
+            // Search
+            searchInput: document.getElementById('search-input'),
+
+            // Edit Modal
             editModal: document.getElementById('edit-modal'),
             editModalContent: document.getElementById('edit-modal-content'),
             editModalTitle: document.getElementById('edit-modal-title'),
             editNameInput: document.getElementById('edit-name-input'),
-            editCategorySelect: document.getElementById('edit-category-select'),
+            editCategorySelect: document.getElementById('edit-category-select'), // Now a hidden input
+            editCategoryDropdownBtn: document.getElementById('edit-category-dropdown-btn'),
+            editCategoryDropdownMenu: document.getElementById('edit-category-dropdown-menu'),
+            editSelectedCategoryDisplay: document.getElementById('edit-selected-category-display'),
             editPriceInput: document.getElementById('edit-price-input'),
             editQuantityInput: document.getElementById('edit-quantity-input'),
+            editUnitInput: document.getElementById('edit-unit-input'),
+            editUnitDropdownBtn: document.getElementById('edit-unit-dropdown-btn'),
+            editUnitDropdownMenu: document.getElementById('edit-unit-dropdown-menu'),
+            editSelectedUnitDisplay: document.getElementById('edit-selected-unit-display'),
             cancelEditBtn: document.getElementById('cancel-edit-btn'),
             saveEditBtn: document.getElementById('save-edit-btn'),
             // Modal Category
@@ -1361,6 +1460,159 @@
             if (close) toggleCategoryDropdown();
         }
 
+        function renderUnitDropdown() {
+            const menu = dom.unitDropdownMenu;
+            if (!menu) return;
+            
+            const units = ['un', 'kg', 'g', 'L', 'ml', 'cx', 'pct'];
+            const currentValue = dom.inputUnit ? dom.inputUnit.value : 'un';
+            const isDark = state.theme === 'dark' || state.shopMode;
+            menu.innerHTML = '';
+            
+            units.forEach(unit => {
+                const item = document.createElement('div');
+                item.className = isDark 
+                    ? 'px-4 py-2 hover:bg-gray-700 cursor-pointer text-sm text-gray-300 transition-colors text-center'
+                    : 'px-4 py-2 hover:bg-slate-50 cursor-pointer text-sm text-slate-600 transition-colors text-center';
+                
+                item.textContent = unit;
+                item.onclick = () => selectUnit(unit);
+                menu.appendChild(item);
+            });
+
+            // Restore value
+            if (units.includes(currentValue)) {
+                selectUnit(currentValue, false);
+            } else {
+                selectUnit('un', false);
+            }
+        }
+
+        function toggleUnitDropdown() {
+            if (!dom.unitDropdownMenu) return;
+            dom.unitDropdownMenu.classList.toggle('hidden');
+            
+            if (dom.unitDropdownBtn) {
+                const icon = dom.unitDropdownBtn.querySelector('i') || dom.unitDropdownBtn.querySelector('svg');
+                if (icon) {
+                    if (dom.unitDropdownMenu.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+            }
+        }
+
+        function selectUnit(unit, close = true) {
+            if(dom.inputUnit) dom.inputUnit.value = unit;
+            if(dom.selectedUnitDisplay) dom.selectedUnitDisplay.textContent = unit;
+            if (close) toggleUnitDropdown();
+        }
+
+        // --- EDIT MODAL DROPDOWNS ---
+
+        function renderEditCategories() {
+            const menu = dom.editCategoryDropdownMenu;
+            if (!menu) return;
+            
+            const currentValue = dom.editCategorySelect.value;
+            const isDark = state.theme === 'dark'; // Edit modal always follows theme, not shop mode
+            menu.innerHTML = '';
+            
+            state.categories.forEach(cat => {
+                const item = document.createElement('div');
+                item.className = isDark 
+                    ? 'px-4 py-2 hover:bg-gray-700 cursor-pointer text-sm text-gray-300 transition-colors flex items-center justify-between group'
+                    : 'px-4 py-2 hover:bg-slate-50 cursor-pointer text-sm text-slate-600 transition-colors flex items-center justify-between group';
+                
+                const content = document.createElement('div');
+                content.className = 'flex items-center gap-2 min-w-0 flex-1';
+                content.innerHTML = `<span class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></span><span class="truncate" title="${cat}">${cat}</span>`;
+                item.appendChild(content);
+
+                item.onclick = () => selectEditCategory(cat);
+                menu.appendChild(item);
+            });
+
+            if (state.categories.includes(currentValue)) {
+                selectEditCategory(currentValue, false);
+            } else {
+                selectEditCategory('Geral', false);
+            }
+        }
+
+        function toggleEditCategoryDropdown() {
+            if (!dom.editCategoryDropdownMenu) return;
+            dom.editCategoryDropdownMenu.classList.toggle('hidden');
+            
+            if (dom.editCategoryDropdownBtn) {
+                const icon = dom.editCategoryDropdownBtn.querySelector('i') || dom.editCategoryDropdownBtn.querySelector('svg');
+                if (icon) {
+                    if (dom.editCategoryDropdownMenu.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+            }
+        }
+
+        function selectEditCategory(cat, close = true) {
+            dom.editCategorySelect.value = cat;
+            dom.editSelectedCategoryDisplay.textContent = cat;
+            if (close) toggleEditCategoryDropdown();
+        }
+
+        function renderEditUnitDropdown() {
+            const menu = dom.editUnitDropdownMenu;
+            if (!menu) return;
+            
+            const units = ['un', 'kg', 'g', 'L', 'ml', 'cx', 'pct'];
+            const currentValue = dom.editUnitInput ? dom.editUnitInput.value : 'un';
+            const isDark = state.theme === 'dark';
+            menu.innerHTML = '';
+            
+            units.forEach(unit => {
+                const item = document.createElement('div');
+                item.className = isDark 
+                    ? 'px-4 py-2 hover:bg-gray-700 cursor-pointer text-sm text-gray-300 transition-colors text-center'
+                    : 'px-4 py-2 hover:bg-slate-50 cursor-pointer text-sm text-slate-600 transition-colors text-center';
+                
+                item.textContent = unit;
+                item.onclick = () => selectEditUnit(unit);
+                menu.appendChild(item);
+            });
+
+            if (units.includes(currentValue)) {
+                selectEditUnit(currentValue, false);
+            } else {
+                selectEditUnit('un', false);
+            }
+        }
+
+        function toggleEditUnitDropdown() {
+            if (!dom.editUnitDropdownMenu) return;
+            dom.editUnitDropdownMenu.classList.toggle('hidden');
+            
+            if (dom.editUnitDropdownBtn) {
+                const icon = dom.editUnitDropdownBtn.querySelector('i') || dom.editUnitDropdownBtn.querySelector('svg');
+                if (icon) {
+                    if (dom.editUnitDropdownMenu.classList.contains('hidden')) {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+                }
+            }
+        }
+
+        function selectEditUnit(unit, close = true) {
+            if(dom.editUnitInput) dom.editUnitInput.value = unit;
+            if(dom.editSelectedUnitDisplay) dom.editSelectedUnitDisplay.textContent = unit;
+            if (close) toggleEditUnitDropdown();
+        }
+
         function renderAll() {
             // View Switching
             if (state.view === 'hub') {
@@ -1440,17 +1692,35 @@
         function renderList() {
             dom.itemsContainer.innerHTML = '';
 
-            if (state.items.length === 0) {
-                dom.itemsContainer.innerHTML = `
-                    <div class="text-center py-12 opacity-50">
-                        <i data-lucide="shopping-cart" class="mx-auto mb-3 w-12 h-12"></i>
-                        <p>Sua lista está vazia.</p>
-                    </div>`;
+            // Filter items based on search term
+            let filteredItems = state.items;
+            if (state.searchTerm) {
+                const term = state.searchTerm.toLowerCase();
+                filteredItems = state.items.filter(item => 
+                    item.name.toLowerCase().includes(term) || 
+                    item.category.toLowerCase().includes(term)
+                );
+            }
+
+            if (filteredItems.length === 0) {
+                if (state.searchTerm) {
+                    dom.itemsContainer.innerHTML = `
+                        <div class="text-center py-12 opacity-50">
+                            <i data-lucide="search-x" class="mx-auto mb-3 w-12 h-12"></i>
+                            <p>Nenhum item encontrado para "${state.searchTerm}".</p>
+                        </div>`;
+                } else {
+                    dom.itemsContainer.innerHTML = `
+                        <div class="text-center py-12 opacity-50">
+                            <i data-lucide="shopping-cart" class="mx-auto mb-3 w-12 h-12"></i>
+                            <p>Sua lista está vazia.</p>
+                        </div>`;
+                }
                 return;
             }
 
             // Sorting
-            let itemsToSort = [...state.items];
+            let itemsToSort = [...filteredItems];
             const sortType = state.sortBy || 'default';
 
             if (sortType === 'price-desc') {
@@ -1463,13 +1733,40 @@
 
             // Agrupar
             const groups = {};
+            // Ensure groups follow state.categories order
+            state.categories.forEach(cat => {
+                groups[cat] = [];
+            });
+            
+            // Fill groups
             itemsToSort.forEach(item => {
-                if (!groups[item.category]) groups[item.category] = [];
-                groups[item.category].push(item);
+                if (!groups[item.category]) {
+                    // Fallback for items with categories not in the list (shouldn't happen but safe)
+                    if(!groups['Outros']) groups['Outros'] = [];
+                    groups['Outros'].push(item);
+                } else {
+                    groups[item.category].push(item);
+                }
             });
 
             // Gerar HTML
-            for (const [category, items] of Object.entries(groups)) {
+            // Iterate over state.categories to maintain order
+            const categoriesToRender = [...state.categories];
+            if(groups['Outros'] && groups['Outros'].length > 0) categoriesToRender.push('Outros');
+
+            categoriesToRender.forEach((category, index) => {
+                const items = groups[category] || [];
+                
+                // Skip empty categories logic
+                // If searching, only show categories with matches
+                if (state.searchTerm && items.length === 0) return;
+
+                // Default skip logic
+                if (!state.searchTerm && state.categories.length > 1 && items.length === 0) return;
+                
+                // If shop mode and empty, definitely skip
+                if (state.shopMode && items.length === 0) return;
+
                 const groupDiv = document.createElement('div');
                 const isShopMode = state.shopMode;
                 const isDark = state.theme === 'dark';
@@ -1506,7 +1803,16 @@
 
                     // Calculate total for this item line
                     const qty = item.quantity || 1;
+                    const unit = item.unit || 'un';
                     const totalItemPrice = (item.price || 0) * qty;
+
+                    // Display Quantity Logic
+                    let qtyDisplay = '';
+                    if (unit === 'un') {
+                        if (qty > 1) qtyDisplay = `<span class="text-indigo-500 font-bold mr-1">${qty}x</span>`;
+                    } else {
+                        qtyDisplay = `<span class="text-indigo-500 font-bold mr-1">${qty}${unit}</span>`;
+                    }
 
                     // Delete button logic (Hide in shop mode unless necessary, here hiding for simplicity)
                     const deleteBtn = isShopMode 
@@ -1514,7 +1820,7 @@
                         : `<div class="flex items-center gap-2">
                             <div class="text-right mr-2">
                                 <span class="text-slate-600 font-medium text-sm block">${totalItemPrice > 0 ? 'R$ ' + formatCurrency(totalItemPrice) : ''}</span>
-                                ${qty > 1 ? `<span class="text-xs text-slate-400 block">${qty}x R$ ${formatCurrency(item.price)}</span>` : ''}
+                                ${qty > 1 ? `<span class="text-xs text-slate-400 block">${qty}${unit} R$ ${formatCurrency(item.price)}</span>` : ''}
                             </div>
                             <button onclick="event.stopPropagation(); openEditModal('${item.id}')" class="text-slate-300 hover:text-indigo-500 p-2 transition-colors" title="Editar">
                                 <i data-lucide="pencil" class="w-4 h-4"></i>
@@ -1532,7 +1838,7 @@
                                 </div>
                                 <div class="min-w-0 flex-1">
                                     <p class="font-medium transition-all truncate ${textClass} ${textColor} ${isShopMode ? 'text-lg' : ''}" title="${item.name}">
-                                        ${qty > 1 ? `<span class="text-indigo-500 font-bold mr-1">${qty}x</span>` : ''}
+                                        ${qtyDisplay}
                                         ${item.name}
                                     </p>
                                     ${!isShopMode && item.price > 0 ? `<p class="text-xs text-slate-400 mt-0.5">Est: R$ ${formatCurrency(totalItemPrice)}</p>` : ''}
@@ -1545,16 +1851,33 @@
                     `;
                 });
 
+                // Category Header with Reordering
+                let reorderControls = '';
+                if (!isShopMode && category !== 'Outros') {
+                    const isFirst = index === 0;
+                    const isLast = index === state.categories.length - 1;
+                    
+                    reorderControls = `
+                        <div class="flex items-center gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            ${!isFirst ? `<button onclick="moveCategory('${category}', -1)" class="p-1 hover:bg-black/10 rounded text-current" title="Mover para cima"><i data-lucide="arrow-up" class="w-3 h-3"></i></button>` : ''}
+                            ${!isLast ? `<button onclick="moveCategory('${category}', 1)" class="p-1 hover:bg-black/10 rounded text-current" title="Mover para baixo"><i data-lucide="arrow-down" class="w-3 h-3"></i></button>` : ''}
+                        </div>
+                    `;
+                }
+
                 groupDiv.innerHTML = `
-                    <div class="px-4 py-2 text-xs font-bold uppercase tracking-wider flex justify-between items-center ${headerClass}">
-                        <span>${category}</span>
+                    <div class="px-4 py-2 text-xs font-bold uppercase tracking-wider flex justify-between items-center ${headerClass} group">
+                        <div class="flex items-center">
+                            <span>${category}</span>
+                            ${reorderControls}
+                        </div>
                         <span class="opacity-60">${items.length} itens</span>
                     </div>
                     <div>${itemsHtml}</div>
                 `;
 
                 dom.itemsContainer.appendChild(groupDiv);
-            }
+            });
         }
 
         function updateTheme() {
@@ -1649,7 +1972,11 @@
                 dom.sidebar.classList.add('hidden');
                 dom.mainSection.classList.remove('lg:col-span-8');
                 dom.mainSection.classList.add('lg:col-span-12', 'max-w-2xl', 'mx-auto', 'w-full');
-                dom.addForm.classList.add('hidden');
+                
+                // Hide Action Bar in Shop Mode
+                const actionBar = document.getElementById('action-bar');
+                if(actionBar) actionBar.classList.add('hidden');
+
                 dom.shopFooter.classList.remove('hidden', 'translate-y-full');
                 
                 // Shop Footer Theme
@@ -1660,7 +1987,11 @@
                 dom.sidebar.classList.remove('hidden');
                 dom.mainSection.classList.add('lg:col-span-8');
                 dom.mainSection.classList.remove('lg:col-span-12', 'max-w-2xl', 'mx-auto', 'w-full');
-                dom.addForm.classList.remove('hidden');
+                
+                // Show Action Bar
+                const actionBar = document.getElementById('action-bar');
+                if(actionBar) actionBar.classList.remove('hidden');
+
                 dom.shopFooter.classList.add('hidden', 'translate-y-full');
             }
 
@@ -1684,42 +2015,64 @@
                 }
             }
 
-            // Update Add Form Theme
-            if (dom.addForm) {
-                dom.addForm.className = isDark
-                    ? 'bg-gray-800 p-3 rounded-2xl shadow-sm border border-gray-700 mb-6 fade-in transition-colors duration-500'
-                    : 'bg-white p-3 rounded-2xl shadow-sm border border-slate-100 mb-6 fade-in transition-colors duration-500';
+            // Update Add Item Modal Theme
+            if (dom.addItemModalContent) {
+                dom.addItemModalContent.className = isDark
+                    ? 'bg-gray-800 p-6 rounded-2xl shadow-xl max-w-sm w-full mx-4 border border-gray-700 transition-colors duration-500'
+                    : 'bg-white p-6 rounded-2xl shadow-xl max-w-sm w-full mx-4 border border-slate-100 transition-colors duration-500';
                 
-                if (state.shopMode) dom.addForm.classList.add('hidden');
-
-                const inputBaseClass = isDark
-                    ? 'bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-xl text-sm transition-all text-white placeholder-gray-400 font-medium'
-                    : 'bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-sm transition-all font-medium';
-
-                dom.inputName.className = `${inputBaseClass} w-full h-12 pl-10`;
+                dom.addItemModalTitle.className = isDark ? 'text-lg font-bold text-white mb-4 transition-colors' : 'text-lg font-bold text-slate-800 mb-4 transition-colors';
                 
-                // Custom Dropdown Theme
+                const inputClass = isDark
+                    ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-sm transition-all text-white placeholder-gray-400 font-medium'
+                    : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm transition-all font-medium';
+                
+                dom.inputName.className = `${inputClass} pl-9`;
+                dom.inputQuantity.className = `${inputClass} px-3`;
+                dom.inputPrice.className = `${inputClass} pl-8`;
+                
+                // Unit Dropdown Theme
+                if (dom.unitDropdownBtn) {
+                    dom.unitDropdownBtn.className = isDark
+                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-2 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-2 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    
+                    dom.unitDropdownMenu.className = isDark
+                        ? 'hidden absolute top-full right-0 w-24 mt-2 bg-gray-800 rounded-xl shadow-xl border border-gray-700 overflow-hidden z-20 max-h-60 overflow-y-auto'
+                        : 'hidden absolute top-full right-0 w-24 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto';
+                }
+
+                const labels = dom.addItemModalContent.querySelectorAll('label');
+                labels.forEach(label => {
+                    label.className = isDark ? 'block text-xs font-medium text-gray-400 mb-1' : 'block text-xs font-medium text-slate-500 mb-1';
+                });
+
+                dom.cancelAddBtn.className = isDark
+                    ? 'px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 font-medium transition-colors'
+                    : 'px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-medium transition-colors';
+                
+                // Custom Dropdown Theme inside Modal
                 if (dom.categoryDropdownBtn) {
                     dom.categoryDropdownBtn.className = isDark
-                        ? 'w-full h-full bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-xl px-3 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
-                        : 'w-full h-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-3 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
                     
                     dom.categoryDropdownMenu.className = isDark
                         ? 'hidden absolute top-full left-0 w-full mt-2 bg-gray-800 rounded-xl shadow-xl border border-gray-700 overflow-hidden z-20 max-h-60 overflow-y-auto'
                         : 'hidden absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto';
-                    
-                    // Re-render categories to apply theme to items
-                    renderCategories();
                 }
-                
-                dom.inputPrice.className = `${inputBaseClass} w-full h-12 pl-7 lg:pl-10 pr-1`;
-                dom.inputQuantity.className = `${inputBaseClass} w-full h-12 text-center px-0`;
+            }
 
-                // Update Add Button Shadow
-                if (dom.addBtn) {
-                    dom.addBtn.className = isDark
-                        ? 'col-span-2 lg:w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl flex items-center justify-center transition-all shadow-lg shadow-indigo-900/50 hover:scale-105 active:scale-95'
-                        : 'col-span-2 lg:w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl flex items-center justify-center transition-all shadow-lg shadow-indigo-200 hover:shadow-indigo-300 hover:scale-105 active:scale-95';
+            // Update Search Bar Theme
+            if (dom.searchInput) {
+                dom.searchInput.className = isDark
+                    ? 'w-full h-12 pl-10 bg-gray-800 border border-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-900 rounded-xl text-sm transition-all font-medium shadow-sm text-white placeholder-gray-500'
+                    : 'w-full h-12 pl-10 bg-white border border-slate-100 focus:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-sm transition-all font-medium shadow-sm';
+                
+                if (dom.openAddModalBtn) {
+                    dom.openAddModalBtn.className = isDark
+                        ? 'h-10 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-indigo-900/50 hover:scale-105 active:scale-95'
+                        : 'h-10 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-indigo-200 hover:shadow-indigo-300 hover:scale-105 active:scale-95';
                 }
             }
 
@@ -1750,9 +2103,30 @@
                     : 'w-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-4 py-2 text-sm transition-all';
                 
                 dom.editNameInput.className = inputClass;
-                dom.editCategorySelect.className = inputClass;
                 dom.editPriceInput.className = inputClass;
                 dom.editQuantityInput.className = inputClass;
+
+                // Edit Category Dropdown Theme
+                if (dom.editCategoryDropdownBtn) {
+                    dom.editCategoryDropdownBtn.className = isDark
+                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-3 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    
+                    dom.editCategoryDropdownMenu.className = isDark
+                        ? 'hidden absolute top-full left-0 w-full mt-2 bg-gray-800 rounded-xl shadow-xl border border-gray-700 overflow-hidden z-20 max-h-60 overflow-y-auto'
+                        : 'hidden absolute top-full left-0 w-full mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto';
+                }
+
+                // Edit Unit Dropdown Theme
+                if (dom.editUnitDropdownBtn) {
+                    dom.editUnitDropdownBtn.className = isDark
+                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-2 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-2 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    
+                    dom.editUnitDropdownMenu.className = isDark
+                        ? 'hidden absolute top-full right-0 w-24 mt-2 bg-gray-800 rounded-xl shadow-xl border border-gray-700 overflow-hidden z-20 max-h-60 overflow-y-auto'
+                        : 'hidden absolute top-full right-0 w-24 mt-2 bg-white rounded-xl shadow-xl border border-slate-100 overflow-hidden z-20 max-h-60 overflow-y-auto';
+                }
 
                 const labels = dom.editModalContent.querySelectorAll('label');
                 labels.forEach(label => {
@@ -2038,15 +2412,13 @@
             dom.editPriceInput.value = item.price || '';
             dom.editQuantityInput.value = item.quantity || 1;
             
-            // Populate categories
-            dom.editCategorySelect.innerHTML = '';
-            state.categories.forEach(cat => {
-                const option = document.createElement('option');
-                option.value = cat;
-                option.textContent = cat;
-                if (cat === item.category) option.selected = true;
-                dom.editCategorySelect.appendChild(option);
-            });
+            // Set initial values for hidden inputs
+            dom.editCategorySelect.value = item.category || 'Geral';
+            dom.editUnitInput.value = item.unit || 'un';
+
+            // Render dropdowns
+            renderEditCategories();
+            renderEditUnitDropdown();
 
             dom.editModal.classList.remove('hidden');
         }
@@ -2066,6 +2438,7 @@
             
             const price = parseFloat(dom.editPriceInput.value) || 0;
             const quantity = parseInt(dom.editQuantityInput.value) || 1;
+            const unit = dom.editUnitInput.value || 'un';
             const category = dom.editCategorySelect.value;
 
             if (!name) return;
@@ -2073,7 +2446,7 @@
             const itemIndex = state.items.findIndex(i => i.id === state.editingItemId);
             if (itemIndex !== -1) {
                 const idToUpdate = state.editingItemId; // Capture ID before closing modal
-                const updatedItem = { ...state.items[itemIndex], name, price, quantity, category };
+                const updatedItem = { ...state.items[itemIndex], name, price, quantity, unit, category };
                 
                 // Optimistic update
                 state.items[itemIndex] = updatedItem;
@@ -2437,6 +2810,7 @@
 
                 const price = parseFloat(dom.inputPrice.value) || 0;
                 const quantity = parseInt(dom.inputQuantity.value) || 1;
+                const unit = document.getElementById('input-unit').value || 'un';
                 const category = dom.inputCategory.value;
 
                 if (!name) {
@@ -2449,6 +2823,7 @@
                     name,
                     price,
                     quantity,
+                    unit,
                     category,
                     checked: false
                 };
@@ -2471,10 +2846,11 @@
                     }
                 }
                 
-                // Limpar form
+                // Limpar form e fechar modal
                 dom.inputName.value = '';
                 dom.inputPrice.value = '';
                 dom.inputQuantity.value = '';
+                closeAddModal();
                 
                 renderAll();
             } catch (error) {
@@ -2482,8 +2858,18 @@
             } finally {
                 dom.addBtn.disabled = false;
                 dom.addBtn.innerHTML = originalBtnContent;
-                dom.inputName.focus();
             }
+        }
+
+        function openAddModal() {
+            dom.addItemModal.classList.remove('hidden');
+            renderCategories();
+            renderUnitDropdown();
+            dom.inputName.focus();
+        }
+
+        function closeAddModal() {
+            dom.addItemModal.classList.add('hidden');
         }
 
         async function handleToggle(id) {
@@ -2503,6 +2889,65 @@
 
         function toggleShopMode() {
             state.shopMode = !state.shopMode;
+            
+            // Toggle Share Button
+            const shareBtn = document.getElementById('share-btn');
+            if (shareBtn) {
+                if (state.shopMode) {
+                    shareBtn.classList.add('hidden');
+                } else {
+                    shareBtn.classList.remove('hidden');
+                }
+            }
+
+            renderAll();
+        }
+
+        function shareList() {
+            const itemsToBuy = state.items.filter(i => !i.checked);
+            if (itemsToBuy.length === 0) {
+                alert('Sua lista de compras está vazia ou tudo já foi marcado!');
+                return;
+            }
+
+            let text = `*Lista de Compras - ${state.budgetTitle}*\n\n`;
+            
+            // Group by category for nicer output
+            const groups = {};
+            itemsToBuy.forEach(item => {
+                if (!groups[item.category]) groups[item.category] = [];
+                groups[item.category].push(item);
+            });
+
+            for (const [cat, items] of Object.entries(groups)) {
+                text += `*${cat}*\n`;
+                items.forEach(item => {
+                    const unit = item.unit && item.unit !== 'un' ? item.unit : '';
+                    const qty = item.quantity || 1;
+                    text += `- [ ] ${qty}${unit} ${item.name}\n`;
+                });
+                text += '\n';
+            }
+
+            text += `_Gerado por LionsDash_`;
+
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        function moveCategory(category, direction) {
+            const index = state.categories.indexOf(category);
+            if (index === -1) return;
+
+            const newIndex = index + direction;
+            if (newIndex < 0 || newIndex >= state.categories.length) return;
+
+            // Swap
+            const temp = state.categories[index];
+            state.categories[index] = state.categories[newIndex];
+            state.categories[newIndex] = temp;
+
+            saveActiveBudgetMetadata();
             renderAll();
         }
 
@@ -2523,11 +2968,54 @@
             toggleCategoryDropdown();
         });
 
+        if (dom.unitDropdownBtn) {
+            dom.unitDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleUnitDropdown();
+            });
+        }
+
+        // Edit Modal Dropdown Listeners
+        if (dom.editCategoryDropdownBtn) {
+            dom.editCategoryDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleEditCategoryDropdown();
+            });
+        }
+
+        if (dom.editUnitDropdownBtn) {
+            dom.editUnitDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleEditUnitDropdown();
+            });
+        }
+
         document.addEventListener('click', (e) => {
             // Category Dropdown
             if (!dom.categoryDropdownBtn.contains(e.target) && !dom.categoryDropdownMenu.contains(e.target)) {
                 if (!dom.categoryDropdownMenu.classList.contains('hidden')) {
                     toggleCategoryDropdown();
+                }
+            }
+
+            // Unit Dropdown
+            if (dom.unitDropdownBtn && dom.unitDropdownMenu && !dom.unitDropdownBtn.contains(e.target) && !dom.unitDropdownMenu.contains(e.target)) {
+                if (!dom.unitDropdownMenu.classList.contains('hidden')) {
+                    toggleUnitDropdown();
+                }
+            }
+
+            // Edit Category Dropdown
+            if (dom.editCategoryDropdownBtn && dom.editCategoryDropdownMenu && !dom.editCategoryDropdownBtn.contains(e.target) && !dom.editCategoryDropdownMenu.contains(e.target)) {
+                if (!dom.editCategoryDropdownMenu.classList.contains('hidden')) {
+                    toggleEditCategoryDropdown();
+                }
+            }
+
+            // Edit Unit Dropdown
+            if (dom.editUnitDropdownBtn && dom.editUnitDropdownMenu && !dom.editUnitDropdownBtn.contains(e.target) && !dom.editUnitDropdownMenu.contains(e.target)) {
+                if (!dom.editUnitDropdownMenu.classList.contains('hidden')) {
+                    toggleEditUnitDropdown();
                 }
             }
             
@@ -2539,6 +3027,19 @@
                     toggleSortDropdown();
                 }
             }
+        });
+
+        // Add Modal Listeners
+        dom.openAddModalBtn.addEventListener('click', openAddModal);
+        dom.cancelAddBtn.addEventListener('click', closeAddModal);
+        dom.addItemModal.addEventListener('click', (e) => {
+            if (e.target === dom.addItemModal) closeAddModal();
+        });
+
+        // Search Listener
+        dom.searchInput.addEventListener('input', (e) => {
+            state.searchTerm = e.target.value;
+            renderList();
         });
 
         dom.addBtn.addEventListener('click', handleAdd);
@@ -2577,6 +3078,10 @@
         dom.inputQuantity.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') handleAdd(e);
         });
+
+        // Share Button Listener
+        const shareBtn = document.getElementById('share-btn');
+        if (shareBtn) shareBtn.addEventListener('click', shareList);
 
         dom.toggleBtn.addEventListener('click', toggleShopMode);
         dom.themeBtn.addEventListener('click', toggleTheme);
