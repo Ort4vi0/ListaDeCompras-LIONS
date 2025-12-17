@@ -457,6 +457,15 @@
                 <button id="cancel-settings-btn" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-medium transition-colors">Cancelar</button>
                 <button id="save-settings-btn" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-colors">Salvar</button>
             </div>
+
+            <!-- GitHub & Version Info -->
+            <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+                <a href="https://github.com/Ort4vi0/ListaDeCompras-LIONS" target="_blank" class="inline-flex items-center gap-2 text-xs text-slate-400 hover:text-indigo-500 transition-colors mb-1">
+                    <i data-lucide="github" class="w-3 h-3"></i>
+                    <span>Ort4vi0/ListaDeCompras-LIONS</span>
+                </a>
+                <p class="text-[10px] text-slate-300 font-mono">v1.0.2</p>
+            </div>
         </div>
     </div>
 
@@ -2413,49 +2422,68 @@
         async function handleAdd(e) {
             if(e) e.preventDefault();
             
-            let name = dom.inputName.value.trim();
-            if (name.length > 0) {
-                name = name.charAt(0).toUpperCase() + name.slice(1);
-            }
+            // Proteção contra múltiplos cliques
+            if (dom.addBtn.disabled) return;
 
-            const price = parseFloat(dom.inputPrice.value) || 0;
-            const quantity = parseInt(dom.inputQuantity.value) || 1;
-            const category = dom.inputCategory.value;
+            const originalBtnContent = dom.addBtn.innerHTML;
+            dom.addBtn.disabled = true;
+            dom.addBtn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>';
 
-            if (!name) return;
-
-            const tempItem = {
-                name,
-                price,
-                quantity,
-                category,
-                checked: false
-            };
-
-            // Adiciona localmente para feedback instantâneo (Optimistic UI)
-            // state.items.push({...tempItem, id: Date.now()}); 
-            // renderAll();
-
-            // Ou espera API
-            const newItem = await apiService.addItem(tempItem);
-            state.items.push(newItem);
-            syncLocalState();
-
-            // Save product for future suggestions
-            if (!state.products.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-                const newProd = { name, price };
-                const res = await apiService.createProduct(newProd);
-                if (res && res.product) {
-                    state.products.push(res.product);
+            try {
+                let name = dom.inputName.value.trim();
+                if (name.length > 0) {
+                    name = name.charAt(0).toUpperCase() + name.slice(1);
                 }
+
+                const price = parseFloat(dom.inputPrice.value) || 0;
+                const quantity = parseInt(dom.inputQuantity.value) || 1;
+                const category = dom.inputCategory.value;
+
+                if (!name) {
+                    dom.addBtn.disabled = false;
+                    dom.addBtn.innerHTML = originalBtnContent;
+                    return;
+                }
+
+                const tempItem = {
+                    name,
+                    price,
+                    quantity,
+                    category,
+                    checked: false
+                };
+
+                // Adiciona localmente para feedback instantâneo (Optimistic UI)
+                // state.items.push({...tempItem, id: Date.now()}); 
+                // renderAll();
+
+                // Ou espera API
+                const newItem = await apiService.addItem(tempItem);
+                state.items.push(newItem);
+                syncLocalState();
+
+                // Save product for future suggestions
+                if (!state.products.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+                    const newProd = { name, price };
+                    const res = await apiService.createProduct(newProd);
+                    if (res && res.product) {
+                        state.products.push(res.product);
+                    }
+                }
+                
+                // Limpar form
+                dom.inputName.value = '';
+                dom.inputPrice.value = '';
+                dom.inputQuantity.value = '';
+                
+                renderAll();
+            } catch (error) {
+                console.error("Erro ao adicionar item:", error);
+            } finally {
+                dom.addBtn.disabled = false;
+                dom.addBtn.innerHTML = originalBtnContent;
+                dom.inputName.focus();
             }
-            
-            // Limpar form
-            dom.inputName.value = '';
-            dom.inputPrice.value = '';
-            dom.inputQuantity.value = '';
-            
-            renderAll();
         }
 
         async function handleToggle(id) {
