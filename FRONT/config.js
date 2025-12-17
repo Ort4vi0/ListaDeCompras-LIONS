@@ -1,6 +1,6 @@
 const CONFIG = {
     // Link da API
-    API_BASE_URL: 'http://localhost:3000/api',
+    API_BASE_URL: 'https://api-lionsdash.onrender.com/api',
     
     // App Identity
     APP_NAME: 'Otávio de Quadros Sonnenstrahl - LIONS',
