@@ -12,10 +12,120 @@
     <!-- Ícones Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <!-- Tailwind Config for Dynamic Themes -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        indigo: {
+                            50: 'var(--color-primary-50)',
+                            100: 'var(--color-primary-100)',
+                            200: 'var(--color-primary-200)',
+                            300: 'var(--color-primary-300)',
+                            400: 'var(--color-primary-400)',
+                            500: 'var(--color-primary-500)',
+                            600: 'var(--color-primary-600)',
+                            700: 'var(--color-primary-700)',
+                            800: 'var(--color-primary-800)',
+                            900: 'var(--color-primary-900)',
+                            950: 'var(--color-primary-950)',
+                        },
+                        shop: {
+                            50: 'var(--color-shop-50)',
+                            100: 'var(--color-shop-100)',
+                            200: 'var(--color-shop-200)',
+                            300: 'var(--color-shop-300)',
+                            400: 'var(--color-shop-400)',
+                            500: 'var(--color-shop-500)',
+                            600: 'var(--color-shop-600)',
+                            700: 'var(--color-shop-700)',
+                            800: 'var(--color-shop-800)',
+                            900: 'var(--color-shop-900)',
+                            950: 'var(--color-shop-950)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
     <!-- Configuração de fontes e estilos base -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
+        :root {
+            /* Default Theme (Indigo) */
+            --color-primary-50: #eef2ff;
+            --color-primary-100: #e0e7ff;
+            --color-primary-200: #c7d2fe;
+            --color-primary-300: #a5b4fc;
+            --color-primary-400: #818cf8;
+            --color-primary-500: #6366f1;
+            --color-primary-600: #4f46e5;
+            --color-primary-700: #4338ca;
+            --color-primary-800: #3730a3;
+            --color-primary-900: #312e81;
+            --color-primary-950: #1e1b4b;
+
+            /* Shop Mode Colors (Green Default) */
+            --color-shop-50: #f0fdf4;
+            --color-shop-100: #dcfce7;
+            --color-shop-200: #bbf7d0;
+            --color-shop-300: #86efac;
+            --color-shop-400: #4ade80;
+            --color-shop-500: #22c55e;
+            --color-shop-600: #16a34a;
+            --color-shop-700: #15803d;
+            --color-shop-800: #166534;
+            --color-shop-900: #14532d;
+            --color-shop-950: #052e16;
+        }
+
+        /* Theme Classes */
+        .theme-emerald {
+            --color-primary-50: #ecfdf5;
+            --color-primary-100: #d1fae5;
+            --color-primary-200: #a7f3d0;
+            --color-primary-300: #6ee7b7;
+            --color-primary-400: #34d399;
+            --color-primary-500: #10b981;
+            --color-primary-600: #059669;
+            --color-primary-700: #047857;
+            --color-primary-800: #065f46;
+            --color-primary-900: #064e3b;
+            --color-primary-950: #022c22;
+        }
+
+        .theme-rose {
+            --color-primary-50: #fff1f2;
+            --color-primary-100: #ffe4e6;
+            --color-primary-200: #fecdd3;
+            --color-primary-300: #fda4af;
+            --color-primary-400: #fb7185;
+            --color-primary-500: #f43f5e;
+            --color-primary-600: #e11d48;
+            --color-primary-700: #be123c;
+            --color-primary-800: #9f1239;
+            --color-primary-900: #881337;
+            --color-primary-950: #4c0519;
+        }
+
+        .theme-amber {
+            --color-primary-50: #fffbeb;
+            --color-primary-100: #fef3c7;
+            --color-primary-200: #fde68a;
+            --color-primary-300: #fcd34d;
+            --color-primary-400: #fbbf24;
+            --color-primary-500: #f59e0b;
+            --color-primary-600: #d97706;
+            --color-primary-700: #b45309;
+            --color-primary-800: #92400e;
+            --color-primary-900: #78350f;
+            --color-primary-950: #451a03;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -72,7 +182,7 @@
         <div class="w-full max-w-md px-6 flex flex-col items-center">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-6"></div>
             <h2 class="text-xl font-bold text-slate-800 mb-2" id="loading-title">Conectando ao Servidor...</h2>
-            <p class="text-slate-500 text-sm text-center mb-8" id="loading-text">A API está iniciando. Isso pode levar até 3 minutos se o servidor estiver em repouso.</p>
+            <p class="text-slate-500 text-sm text-center mb-8" id="loading-text">A API está iniciando. Isso pode levar um tempo se o servidor estiver 😴💤💤💤.</p>
             
             <!-- Progress Bar -->
             <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden" id="loading-bar-bg">
@@ -111,6 +221,10 @@
                 <i data-lucide="settings" class="w-5 h-5"></i>
             </button>
 
+            <button id="recipes-btn" class="p-2 rounded-full text-slate-500 hover:bg-slate-100 transition-colors" title="Livro de Receitas">
+                <i data-lucide="book-open" class="w-5 h-5"></i>
+            </button>
+
             <button id="tutorial-btn" class="p-2 rounded-full text-slate-500 hover:bg-slate-100 transition-colors" title="Como usar">
                 <i data-lucide="help-circle" class="w-5 h-5"></i>
             </button>
@@ -129,6 +243,22 @@
             </button>
         </div>
     </header>
+
+    <!-- Offline Warning -->
+    <div id="offline-warning" class="hidden bg-amber-50 border-b border-amber-100 px-6 py-3 flex items-center justify-between transition-colors duration-500">
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-amber-100 text-amber-600 rounded-lg">
+                <i data-lucide="wifi-off" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <p class="text-sm font-bold text-amber-800">Modo Offline</p>
+                <p class="text-xs text-amber-600">Você está desconectado. Algumas funcionalidades podem estar limitadas.</p>
+            </div>
+        </div>
+        <button onclick="location.reload()" class="text-xs font-medium text-amber-700 hover:text-amber-900 underline">
+            Tentar Reconectar
+        </button>
+    </div>
 
     <!-- HUB SECTION -->
     <section id="hub-section" class="max-w-7xl mx-auto p-4 md:p-6 fade-in hidden">
@@ -385,6 +515,17 @@
                     <input type="text" id="settings-app-name" class="w-full bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-4 py-2 text-sm transition-all">
                 </div>
 
+                <!-- Theme Switcher -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Tema de Cores</label>
+                    <div class="flex gap-3">
+                        <button onclick="setTheme('indigo')" class="w-8 h-8 rounded-full hover:ring-2 ring-offset-2 transition-all" style="background-color: #6366f1; --tw-ring-color: #a5b4fc;" title="Indigo (Padrão)"></button>
+                        <button onclick="setTheme('emerald')" class="w-8 h-8 rounded-full bg-emerald-500 hover:ring-2 ring-offset-2 ring-emerald-300 transition-all" title="Emerald (Verde)"></button>
+                        <button onclick="setTheme('rose')" class="w-8 h-8 rounded-full bg-rose-500 hover:ring-2 ring-offset-2 ring-rose-300 transition-all" title="Rose (Rosa)"></button>
+                        <button onclick="setTheme('amber')" class="w-8 h-8 rounded-full bg-amber-500 hover:ring-2 ring-offset-2 ring-amber-300 transition-all" title="Amber (Laranja)"></button>
+                    </div>
+                </div>
+
                 <!-- Round Values Toggle -->
                 <div class="flex items-center justify-between cursor-pointer" id="settings-round-container">
                     <span class="text-sm font-medium text-slate-600 transition-colors" id="settings-round-label">Arredondar Valores</span>
@@ -452,7 +593,7 @@
                     <i data-lucide="github" class="w-3 h-3"></i>
                     <span>Ort4vi0/ListaDeCompras-LIONS</span>
                 </a>
-                <p class="text-[10px] text-slate-300 font-mono">v1.0.2</p>
+                <p class="text-[10px] text-slate-300 font-mono">v1.0.5</p>
             </div>
         </div>
     </div>
@@ -661,6 +802,60 @@
                     <i data-lucide="plus" class="w-4 h-4"></i>
                     <span>Adicionar</span>
                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Receitas (Lista) -->
+    <div id="recipes-modal" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in">
+        <div id="recipes-modal-content" class="bg-white p-6 rounded-2xl shadow-xl max-w-md w-full mx-4 border border-slate-100 transition-colors duration-500 max-h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="recipes-modal-title" class="text-lg font-bold text-slate-800 transition-colors">Livro de Receitas</h3>
+                <button id="close-recipes-modal-btn" class="text-slate-400 hover:text-slate-600 transition-colors">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div id="recipes-list" class="flex-1 overflow-y-auto space-y-3 mb-4 pr-2">
+                <!-- Recipes injected via JS -->
+                <div class="text-center py-8 text-slate-400">
+                    <i data-lucide="chef-hat" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                    <p>Nenhuma receita cadastrada.</p>
+                </div>
+            </div>
+
+            <button id="open-new-recipe-modal-btn" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="plus" class="w-5 h-5"></i>
+                Nova Receita
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Nova Receita -->
+    <div id="new-recipe-modal" class="fixed inset-0 z-[70] flex items-center justify-center bg-black/50 backdrop-blur-sm hidden fade-in">
+        <div id="new-recipe-modal-content" class="bg-white p-6 rounded-2xl shadow-xl max-w-md w-full mx-4 border border-slate-100 transition-colors duration-500 max-h-[90vh] overflow-y-auto">
+            <h3 id="new-recipe-modal-title" class="text-lg font-bold text-slate-800 mb-4 transition-colors">Nova Receita</h3>
+            
+            <div class="space-y-4 mb-6">
+                <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-1">Nome do Prato</label>
+                    <input type="text" id="recipe-name-input" placeholder="Ex: Strogonoff" class="w-full h-10 px-4 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm transition-all font-medium">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-2">Ingredientes</label>
+                    <div id="recipe-ingredients-list" class="space-y-2 mb-2">
+                        <!-- Ingredient rows -->
+                    </div>
+                    <button id="add-ingredient-btn" class="text-sm text-indigo-600 font-medium hover:text-indigo-700 flex items-center gap-1">
+                        <i data-lucide="plus" class="w-4 h-4"></i> Adicionar Ingrediente
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button id="cancel-recipe-btn" class="px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-medium transition-colors">Cancelar</button>
+                <button id="save-recipe-btn" class="px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-colors">Salvar Receita</button>
             </div>
         </div>
     </div>
@@ -888,6 +1083,24 @@
             // confirmAddBtn is dom.addBtn (reused ID)
             openAddModalBtn: document.getElementById('open-add-modal-btn'),
             
+            // Recipes Elements
+            recipesBtn: document.getElementById('recipes-btn'),
+            recipesModal: document.getElementById('recipes-modal'),
+            recipesModalContent: document.getElementById('recipes-modal-content'),
+            recipesModalTitle: document.getElementById('recipes-modal-title'),
+            closeRecipesModalBtn: document.getElementById('close-recipes-modal-btn'),
+            recipesList: document.getElementById('recipes-list'),
+            openNewRecipeModalBtn: document.getElementById('open-new-recipe-modal-btn'),
+            
+            newRecipeModal: document.getElementById('new-recipe-modal'),
+            newRecipeModalContent: document.getElementById('new-recipe-modal-content'),
+            newRecipeModalTitle: document.getElementById('new-recipe-modal-title'),
+            recipeNameInput: document.getElementById('recipe-name-input'),
+            recipeIngredientsList: document.getElementById('recipe-ingredients-list'),
+            addIngredientBtn: document.getElementById('add-ingredient-btn'),
+            cancelRecipeBtn: document.getElementById('cancel-recipe-btn'),
+            saveRecipeBtn: document.getElementById('save-recipe-btn'),
+
             // Search
             searchInput: document.getElementById('search-input'),
 
@@ -1029,6 +1242,7 @@
         async function init() {
             const loadingOverlay = document.getElementById('loading-overlay');
             const progressBar = document.getElementById('loading-progress');
+            const offlineWarning = document.getElementById('offline-warning');
             
             // Start progress animation
             if (progressBar) {
@@ -1038,8 +1252,16 @@
                 }, 100);
             }
             
+            let retries = 0;
+            const maxRetries = 3;
+
             // Loop until API connects
             while (true) {
+                if (!navigator.onLine) {
+                    console.log('Offline detected. Skipping API fetch.');
+                    break;
+                }
+
                 try {
                     // Carregar orçamentos
                     const budgets = await apiService.fetchBudgets();
@@ -1052,10 +1274,26 @@
                     break; // Success!
                 } catch (e) {
                     console.log('Aguardando API...', e);
+                    retries++;
+                    if (retries >= maxRetries) {
+                        console.log('Max retries reached. Entering offline mode.');
+                        break;
+                    }
                     await new Promise(r => setTimeout(r, 2000)); // Retry every 2s
                 }
             }
             
+            // Check if offline or failed
+            if (!navigator.onLine || retries >= maxRetries) {
+                if (offlineWarning) offlineWarning.classList.remove('hidden');
+                // Initialize with empty state or cached data if implemented
+                state.budgets = []; 
+                state.products = [];
+            }
+
+            // Load Recipes
+            loadRecipes();
+
             // Finish progress
             if (progressBar) {
                 progressBar.style.transition = 'width 0.5s ease-out'; // Fast finish
@@ -1101,6 +1339,14 @@
             state.view = 'hub';
             state.activeBudgetId = null;
             state.shopMode = false; // Reset shop mode when going back to hub
+            
+            // Hide Share Button
+            const shareBtn = document.getElementById('share-btn');
+            if(shareBtn) shareBtn.classList.add('hidden');
+            
+            // Hide Back Button
+            if(dom.backToHubBtn) dom.backToHubBtn.classList.add('hidden');
+
             renderAll();
         }
 
@@ -1110,6 +1356,13 @@
 
             state.activeBudgetId = budgetId;
             state.view = 'dashboard';
+            
+            // Show Share Button
+            const shareBtn = document.getElementById('share-btn');
+            if(shareBtn) shareBtn.classList.remove('hidden');
+
+            // Show Back Button
+            if(dom.backToHubBtn) dom.backToHubBtn.classList.remove('hidden');
             
             // Load budget data into active state
             state.budgetTitle = budget.title;
@@ -1380,6 +1633,7 @@
             const menu = dom.categoryDropdownMenu;
             const currentValue = dom.inputCategory.value;
             const isDark = state.theme === 'dark' || state.shopMode;
+            const isShop = state.shopMode;
             menu.innerHTML = '';
             
             state.categories.forEach(cat => {
@@ -1391,7 +1645,9 @@
                 // Content wrapper
                 const content = document.createElement('div');
                 content.className = 'flex items-center gap-2 min-w-0 flex-1';
-                content.innerHTML = `<span class="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0"></span><span class="truncate" title="${cat}">${cat}</span>`;
+                
+                const dotColor = isShop ? 'bg-shop-500' : 'bg-indigo-500';
+                content.innerHTML = `<span class="w-2 h-2 rounded-full ${dotColor} flex-shrink-0"></span><span class="truncate" title="${cat}">${cat}</span>`;
                 
                 item.appendChild(content);
 
@@ -1418,9 +1674,19 @@
 
             // Opção para adicionar nova
             const newItem = document.createElement('div');
-            newItem.className = isDark
-                ? 'px-4 py-2 hover:bg-gray-700 cursor-pointer text-sm text-indigo-400 font-medium transition-colors flex items-center gap-2'
-                : 'px-4 py-2 hover:bg-indigo-50 cursor-pointer text-sm text-indigo-600 font-medium transition-colors flex items-center gap-2';
+            let newItemClass = '';
+            
+            if (isShop) {
+                newItemClass = isDark
+                    ? 'px-4 py-2 hover:bg-gray-700 cursor-pointer text-sm text-shop-400 font-medium transition-colors flex items-center gap-2'
+                    : 'px-4 py-2 hover:bg-shop-50 cursor-pointer text-sm text-shop-600 font-medium transition-colors flex items-center gap-2';
+            } else {
+                newItemClass = isDark
+                    ? 'px-4 py-2 hover:bg-gray-700 cursor-pointer text-sm text-indigo-400 font-medium transition-colors flex items-center gap-2'
+                    : 'px-4 py-2 hover:bg-indigo-50 cursor-pointer text-sm text-indigo-600 font-medium transition-colors flex items-center gap-2';
+            }
+            
+            newItem.className = newItemClass;
             newItem.innerHTML = `<i data-lucide="plus" class="w-4 h-4"></i> Nova Categoria...`;
             newItem.onclick = () => {
                 toggleCategoryDropdown();
@@ -1906,7 +2172,7 @@
 
             // Logo Icon Bg
             if (isShop) {
-                dom.logoIconBg.className = 'p-2 rounded-lg bg-green-500 text-white transition-colors duration-500';
+                dom.logoIconBg.className = 'p-2 rounded-lg bg-shop-500 text-white transition-colors duration-500';
             } else {
                 dom.logoIconBg.className = isDark 
                     ? 'p-2 rounded-lg bg-indigo-600 text-white transition-colors duration-500'
@@ -1919,7 +2185,7 @@
             // Header Texts
             dom.modeText.textContent = isShop ? 'Modo Supermercado Ativo' : 'Dashboard de Planeamento';
             if (isShop) {
-                dom.modeText.className = 'text-xs font-bold text-green-500 uppercase tracking-wide';
+                dom.modeText.className = 'text-xs font-bold text-shop-500 uppercase tracking-wide';
             } else {
                 dom.modeText.className = isDark ? 'text-xs text-gray-400' : 'text-xs text-slate-500';
             }
@@ -1949,8 +2215,8 @@
             if (sortBtn) {
                 if (isShop) {
                     sortBtn.className = isDark
-                        ? 'w-full h-10 bg-gray-700 border-2 border-transparent hover:border-green-400 focus:border-green-400 focus:bg-gray-600 focus:outline-none rounded-lg px-4 text-sm text-gray-300 flex items-center justify-between transition-all'
-                        : 'w-full h-10 bg-slate-50 border-2 border-transparent hover:border-green-400 focus:border-green-400 focus:bg-white focus:outline-none rounded-lg px-4 text-sm text-slate-600 flex items-center justify-between transition-all';
+                        ? 'w-full h-10 bg-gray-700 border-2 border-transparent hover:border-shop-400 focus:border-shop-400 focus:bg-gray-600 focus:outline-none rounded-lg px-4 text-sm text-gray-300 flex items-center justify-between transition-all'
+                        : 'w-full h-10 bg-slate-50 border-2 border-transparent hover:border-shop-400 focus:border-shop-400 focus:bg-white focus:outline-none rounded-lg px-4 text-sm text-slate-600 flex items-center justify-between transition-all';
                 } else {
                     sortBtn.className = isDark
                         ? 'w-full h-10 bg-gray-700 border-2 border-transparent hover:border-indigo-500 focus:border-indigo-500 focus:bg-gray-600 focus:outline-none rounded-lg px-4 text-sm text-gray-300 flex items-center justify-between transition-all'
@@ -1983,6 +2249,13 @@
                 dom.shopFooter.className = isDark
                     ? 'fixed bottom-0 left-0 w-full bg-gray-900 border-t border-gray-800 p-4 shadow-lg z-20 transition-transform duration-300'
                     : 'fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 shadow-lg z-20 transition-transform duration-300';
+                
+                // Update Footer Total Color
+                if(dom.footerTotal) dom.footerTotal.className = 'text-2xl font-bold font-mono text-shop-400';
+                
+                // Update Finish Button Color
+                if(dom.finishShopBtn) dom.finishShopBtn.className = 'bg-shop-600 hover:bg-shop-700 text-white px-6 py-3 rounded-full font-bold shadow-lg transition-colors flex items-center gap-2';
+
             } else {
                 dom.sidebar.classList.remove('hidden');
                 dom.mainSection.classList.add('lg:col-span-8');
@@ -2023,19 +2296,43 @@
                 
                 dom.addItemModalTitle.className = isDark ? 'text-lg font-bold text-white mb-4 transition-colors' : 'text-lg font-bold text-slate-800 mb-4 transition-colors';
                 
-                const inputClass = isDark
-                    ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-sm transition-all text-white placeholder-gray-400 font-medium'
-                    : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm transition-all font-medium';
+                let inputClass = '';
+                if (isShop) {
+                    inputClass = isDark
+                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-shop-500 rounded-lg text-sm transition-all text-white placeholder-gray-400 font-medium'
+                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-shop-400 rounded-lg text-sm transition-all font-medium';
+                } else {
+                    inputClass = isDark
+                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-sm transition-all text-white placeholder-gray-400 font-medium'
+                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm transition-all font-medium';
+                }
                 
                 dom.inputName.className = `${inputClass} pl-9`;
+                
+                // Update Search Icon in Modal
+                const searchIcon = dom.inputName.parentElement.querySelector('i');
+                if (searchIcon) {
+                    if (isShop) {
+                        searchIcon.className = 'h-4 w-4 text-slate-400 group-focus-within:text-shop-500 transition-colors';
+                    } else {
+                        searchIcon.className = 'h-4 w-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors';
+                    }
+                }
+
                 dom.inputQuantity.className = `${inputClass} px-3`;
                 dom.inputPrice.className = `${inputClass} pl-8`;
                 
                 // Unit Dropdown Theme
                 if (dom.unitDropdownBtn) {
-                    dom.unitDropdownBtn.className = isDark
-                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-2 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
-                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-2 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    if (isShop) {
+                        dom.unitDropdownBtn.className = isDark
+                            ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-shop-500 rounded-lg px-2 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                            : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-shop-400 rounded-lg px-2 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    } else {
+                        dom.unitDropdownBtn.className = isDark
+                            ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-2 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                            : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-2 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    }
                     
                     dom.unitDropdownMenu.className = isDark
                         ? 'hidden absolute top-full right-0 w-24 mt-2 bg-gray-800 rounded-xl shadow-xl border border-gray-700 overflow-hidden z-20 max-h-60 overflow-y-auto'
@@ -2047,15 +2344,27 @@
                     label.className = isDark ? 'block text-xs font-medium text-gray-400 mb-1' : 'block text-xs font-medium text-slate-500 mb-1';
                 });
 
+                if (isShop) {
+                    dom.addBtn.className = 'px-4 py-2 rounded-lg bg-shop-600 hover:bg-shop-700 text-white font-medium transition-colors flex items-center gap-2';
+                } else {
+                    dom.addBtn.className = 'px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-medium transition-colors flex items-center gap-2';
+                }
+
                 dom.cancelAddBtn.className = isDark
                     ? 'px-4 py-2 rounded-lg text-gray-300 hover:bg-gray-700 font-medium transition-colors'
                     : 'px-4 py-2 rounded-lg text-slate-600 hover:bg-slate-100 font-medium transition-colors';
                 
                 // Custom Dropdown Theme inside Modal
                 if (dom.categoryDropdownBtn) {
-                    dom.categoryDropdownBtn.className = isDark
-                        ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-3 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
-                        : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    if (isShop) {
+                        dom.categoryDropdownBtn.className = isDark
+                            ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-shop-500 rounded-lg px-3 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                            : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-shop-400 rounded-lg px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    } else {
+                        dom.categoryDropdownBtn.className = isDark
+                            ? 'w-full h-10 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg px-3 text-sm text-gray-300 flex items-center justify-between transition-all font-medium'
+                            : 'w-full h-10 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg px-3 text-sm text-slate-600 flex items-center justify-between transition-all font-medium';
+                    }
                     
                     dom.categoryDropdownMenu.className = isDark
                         ? 'hidden absolute top-full left-0 w-full mt-2 bg-gray-800 rounded-xl shadow-xl border border-gray-700 overflow-hidden z-20 max-h-60 overflow-y-auto'
@@ -2070,9 +2379,13 @@
                     : 'w-full h-12 pl-10 bg-white border border-slate-100 focus:border-indigo-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 rounded-xl text-sm transition-all font-medium shadow-sm';
                 
                 if (dom.openAddModalBtn) {
-                    dom.openAddModalBtn.className = isDark
-                        ? 'h-10 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-indigo-900/50 hover:scale-105 active:scale-95'
-                        : 'h-10 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-indigo-200 hover:shadow-indigo-300 hover:scale-105 active:scale-95';
+                    if (isShop) {
+                        dom.openAddModalBtn.className = 'h-10 px-4 bg-shop-600 hover:bg-shop-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md hover:scale-105 active:scale-95';
+                    } else {
+                        dom.openAddModalBtn.className = isDark
+                            ? 'h-10 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-indigo-900/50 hover:scale-105 active:scale-95'
+                            : 'h-10 px-4 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg flex items-center justify-center gap-2 transition-all shadow-md shadow-indigo-200 hover:shadow-indigo-300 hover:scale-105 active:scale-95';
+                    }
                 }
             }
 
@@ -3145,6 +3458,21 @@
             if (e.target === dom.tutorialModal) closeTutorialModal();
         });
 
+        // Recipes Listeners
+        if (dom.recipesBtn) dom.recipesBtn.addEventListener('click', openRecipesModal);
+        if (dom.closeRecipesModalBtn) dom.closeRecipesModalBtn.addEventListener('click', closeRecipesModal);
+        if (dom.recipesModal) dom.recipesModal.addEventListener('click', (e) => {
+            if (e.target === dom.recipesModal) closeRecipesModal();
+        });
+        if (dom.openNewRecipeModalBtn) dom.openNewRecipeModalBtn.addEventListener('click', openNewRecipeModal);
+        
+        if (dom.cancelRecipeBtn) dom.cancelRecipeBtn.addEventListener('click', closeNewRecipeModal);
+        if (dom.saveRecipeBtn) dom.saveRecipeBtn.addEventListener('click', saveRecipe);
+        if (dom.addIngredientBtn) dom.addIngredientBtn.addEventListener('click', addRecipeIngredientRow);
+        if (dom.newRecipeModal) dom.newRecipeModal.addEventListener('click', (e) => {
+            if (e.target === dom.newRecipeModal) closeNewRecipeModal();
+        });
+
         // Settings Modal Enter Key
         dom.settingsAppName.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') saveSettings();
@@ -3259,6 +3587,306 @@
                 if (e.target === dom.deleteBudgetModal) closeDeleteBudgetModal();
             });
         }
+
+        // --- RECIPES LOGIC ---
+        let recipes = [];
+
+        function loadRecipes() {
+            const saved = localStorage.getItem('lions_recipes');
+            if (saved) {
+                try {
+                    recipes = JSON.parse(saved);
+                } catch (e) {
+                    console.error("Erro ao carregar receitas", e);
+                    recipes = [];
+                }
+            }
+        }
+
+        function saveRecipes() {
+            localStorage.setItem('lions_recipes', JSON.stringify(recipes));
+            renderRecipesList();
+        }
+
+        function openRecipesModal() {
+            const isDark = state.theme === 'dark';
+            
+            // Update Modal Theme
+            dom.recipesModalContent.className = isDark
+                ? 'bg-gray-800 p-6 rounded-2xl shadow-xl max-w-md w-full mx-4 border border-gray-700 transition-colors duration-500 max-h-[80vh] flex flex-col'
+                : 'bg-white p-6 rounded-2xl shadow-xl max-w-md w-full mx-4 border border-slate-100 transition-colors duration-500 max-h-[80vh] flex flex-col';
+            
+            dom.recipesModalTitle.className = isDark
+                ? 'text-lg font-bold text-white transition-colors'
+                : 'text-lg font-bold text-slate-800 transition-colors';
+
+            renderRecipesList();
+            dom.recipesModal.classList.remove('hidden');
+        }
+
+        function closeRecipesModal() {
+            dom.recipesModal.classList.add('hidden');
+        }
+
+        function renderRecipesList() {
+            const list = dom.recipesList;
+            if (!list) return;
+            list.innerHTML = '';
+
+            if (recipes.length === 0) {
+                list.innerHTML = `
+                    <div class="text-center py-8 text-slate-400">
+                        <i data-lucide="chef-hat" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                        <p>Nenhuma receita cadastrada.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            recipes.forEach((recipe, index) => {
+                const card = document.createElement('div');
+                const isDark = state.theme === 'dark';
+                
+                card.className = isDark
+                    ? 'bg-gray-700 p-4 rounded-xl border border-gray-600 flex justify-between items-center group'
+                    : 'bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center group';
+                
+                const ingredientsCount = recipe.ingredients ? recipe.ingredients.length : 0;
+                
+                card.innerHTML = `
+                    <div>
+                        <h4 class="font-bold ${isDark ? 'text-white' : 'text-slate-800'}">${recipe.name}</h4>
+                        <p class="text-xs ${isDark ? 'text-gray-400' : 'text-slate-500'}">${ingredientsCount} ingredientes</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="addRecipeToBudget(${index})" class="p-2 rounded-lg ${isDark ? 'bg-indigo-900 text-indigo-300 hover:bg-indigo-800' : 'bg-indigo-100 text-indigo-600 hover:bg-indigo-200'} transition-colors" title="Adicionar à Lista">
+                            <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="deleteRecipe(${index})" class="p-2 rounded-lg text-slate-400 hover:text-red-500 ${isDark ? 'hover:bg-gray-600' : 'hover:bg-slate-100'} transition-colors" title="Excluir">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+            lucide.createIcons();
+        }
+
+        function openNewRecipeModal() {
+            const isDark = state.theme === 'dark';
+            
+            // Update Modal Theme
+            dom.newRecipeModalContent.className = isDark
+                ? 'bg-gray-800 p-6 rounded-2xl shadow-xl max-w-md w-full mx-4 border border-gray-700 transition-colors duration-500 max-h-[90vh] overflow-y-auto'
+                : 'bg-white p-6 rounded-2xl shadow-xl max-w-md w-full mx-4 border border-slate-100 transition-colors duration-500 max-h-[90vh] overflow-y-auto';
+            
+            dom.newRecipeModalTitle.className = isDark
+                ? 'text-lg font-bold text-white mb-4 transition-colors'
+                : 'text-lg font-bold text-slate-800 mb-4 transition-colors';
+            
+            // Update Input Theme
+            dom.recipeNameInput.className = isDark
+                ? 'w-full h-10 px-4 bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-sm transition-all font-medium text-white placeholder-gray-400'
+                : 'w-full h-10 px-4 bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm transition-all font-medium';
+
+            dom.recipeNameInput.value = '';
+            dom.recipeIngredientsList.innerHTML = '';
+            addRecipeIngredientRow(); // Add first row
+            addRecipeIngredientRow(); // Add second row
+            dom.newRecipeModal.classList.remove('hidden');
+        }
+
+        function closeNewRecipeModal() {
+            dom.newRecipeModal.classList.add('hidden');
+        }
+
+        function addRecipeIngredientRow() {
+            const row = document.createElement('div');
+            const isDark = state.theme === 'dark';
+            row.className = 'flex gap-2 items-center';
+            
+            const inputClass = isDark
+                ? 'bg-gray-700 border-transparent focus:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-sm transition-all text-white placeholder-gray-400'
+                : 'bg-slate-50 border-transparent focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-300 rounded-lg text-sm transition-all';
+
+            row.innerHTML = `
+                <input type="text" placeholder="Ingrediente" class="flex-1 h-9 px-3 ${inputClass} recipe-ing-name">
+                <input type="number" placeholder="Qtd" class="w-16 h-9 px-2 ${inputClass} recipe-ing-qty">
+                <div class="relative w-20 h-9">
+                    <select class="w-full h-full px-1 ${inputClass} recipe-ing-unit appearance-none text-center cursor-pointer">
+                        <option value="un">un</option>
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                        <option value="L">L</option>
+                        <option value="ml">ml</option>
+                        <option value="cx">cx</option>
+                        <option value="pct">pct</option>
+                    </select>
+                    <div class="absolute inset-y-0 right-1 flex items-center pointer-events-none text-slate-400">
+                        <i data-lucide="chevron-down" class="w-3 h-3"></i>
+                    </div>
+                </div>
+                <button onclick="this.parentElement.remove()" class="text-slate-400 hover:text-red-500 p-1"><i data-lucide="x" class="w-4 h-4"></i></button>
+            `;
+            dom.recipeIngredientsList.appendChild(row);
+            lucide.createIcons();
+        }
+
+        function saveRecipe() {
+            const name = dom.recipeNameInput.value.trim();
+            if (!name) {
+                alert('Digite o nome da receita.');
+                return;
+            }
+
+            const ingredients = [];
+            const rows = dom.recipeIngredientsList.querySelectorAll('div');
+            rows.forEach(row => {
+                const ingName = row.querySelector('.recipe-ing-name').value.trim();
+                const ingQty = parseFloat(row.querySelector('.recipe-ing-qty').value) || 1;
+                const ingUnit = row.querySelector('.recipe-ing-unit').value;
+
+                if (ingName) {
+                    ingredients.push({ name: ingName, quantity: ingQty, unit: ingUnit });
+                }
+            });
+
+            if (ingredients.length === 0) {
+                alert('Adicione pelo menos um ingrediente.');
+                return;
+            }
+
+            recipes.push({ name, ingredients });
+            saveRecipes();
+            closeNewRecipeModal();
+            renderRecipesList();
+        }
+
+        function deleteRecipe(index) {
+            if (confirm('Excluir esta receita?')) {
+                recipes.splice(index, 1);
+                saveRecipes();
+            }
+        }
+
+        async function addRecipeToBudget(index) {
+            if (!state.activeBudgetId) {
+                alert('Abra um orçamento primeiro para adicionar os ingredientes.');
+                closeRecipesModal();
+                return;
+            }
+
+            const recipe = recipes[index];
+            if (!recipe) return;
+
+            if (confirm(`Adicionar todos os ingredientes de "${recipe.name}" à lista atual?`)) {
+                closeRecipesModal();
+                
+                // Add items sequentially
+                for (const ing of recipe.ingredients) {
+                    const newItem = {
+                        name: ing.name,
+                        category: 'Geral', // Default category
+                        quantity: ing.quantity,
+                        unit: ing.unit,
+                        price: 0,
+                        checked: false
+                    };
+                    
+                    // Optimistic UI update
+                    state.items.push(newItem);
+                    
+                    // API Call (background)
+                    apiService.addItem(newItem).then(savedItem => {
+                        // Update with real ID if needed
+                    });
+                }
+                
+                renderAll();
+                alert(`${recipe.ingredients.length} ingredientes adicionados!`);
+            }
+        }
+
+        // --- THEME LOGIC ---
+        function setTheme(themeName) {
+            const root = document.documentElement;
+            
+            // Remove all theme classes
+            root.classList.remove('theme-emerald', 'theme-rose', 'theme-amber');
+            
+            // Add new theme class if not default (indigo)
+            if (themeName !== 'indigo') {
+                root.classList.add(`theme-${themeName}`);
+            }
+            
+            // Save preference
+            localStorage.setItem('lions_theme_color', themeName);
+            
+            // Close settings modal
+            closeSettingsModal();
+        }
+
+        // Load saved theme on init
+        const savedThemeColor = localStorage.getItem('lions_theme_color');
+        if (savedThemeColor) {
+            setTheme(savedThemeColor);
+        }
+
+        // --- WHATSAPP SHARE ---
+        function shareList() {
+            let text = `*Lista de Compras: ${state.budgetTitle}*\n\n`;
+            const items = state.items;
+            const pending = items.filter(i => !i.checked);
+            const done = items.filter(i => i.checked);
+
+            if (pending.length > 0) {
+                text += "*A Comprar:*\n";
+                pending.forEach(item => {
+                    text += `⬜ ${item.quantity}${item.unit || 'un'} ${item.name}\n`;
+                });
+                text += "\n";
+            }
+
+            if (done.length > 0) {
+                text += "*Carrinho:*\n";
+                done.forEach(item => {
+                    text += `✅ ${item.quantity}${item.unit || 'un'} ${item.name}\n`;
+                });
+            }
+            
+            const total = state.items.reduce((acc, curr) => acc + (curr.price * (curr.quantity || 1)), 0);
+            text += `\nTotal Estimado: R$ ${total.toFixed(2)}`;
+
+            const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+            window.open(url, '_blank');
+        }
+
+        // --- OFFLINE SUPPORT ---
+        window.addEventListener('online', async () => {
+            console.log("Online");
+            const overlay = document.getElementById('loading-overlay');
+            if(overlay) overlay.classList.add('hidden');
+            
+            const offlineWarning = document.getElementById('offline-warning');
+            if(offlineWarning) offlineWarning.classList.add('hidden');
+            
+            // Reload data from API
+            try {
+                const budgets = await apiService.fetchBudgets();
+                state.budgets = budgets;
+                state.products = await apiService.fetchProducts();
+                renderAll();
+            } catch (e) {
+                console.error("Erro ao recarregar dados após reconexão:", e);
+            }
+        });
+        
+        window.addEventListener('offline', () => {
+            console.log("Offline");
+            const offlineWarning = document.getElementById('offline-warning');
+            if(offlineWarning) offlineWarning.classList.remove('hidden');
+        });
 
         // --- INICIALIZAÇÃO ---
         init();

@@ -1,6 +1,8 @@
-const CACHE_NAME = 'lions-v1';
+const CACHE_NAME = 'lions-v2';
 const urlsToCache = [
   './lions.html',
+  './manifest.json',
+  './config.js',
   'https://cdn.tailwindcss.com',
   'https://unpkg.com/lucide@latest',
   'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
