@@ -1,4 +1,5 @@
 # 🦁 [LionsDash](https://site-lionsdash.onrender.com/lions.html) (LIONS)
+# 🦁 [API](https://api-lionsdash.onrender.com/api/budgets) (API)
 
 **LionsDash** é uma aplicação web completa para gerenciamento de listas de compras e controle de orçamento. O sistema permite criar múltiplos orçamentos, adicionar itens com sugestões inteligentes de preço e acompanhar seus gastos em tempo real.
 
