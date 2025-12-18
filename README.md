@@ -42,7 +42,12 @@ lions/
 │   └── package.json
 │
 └── FRONT/               # Frontend (Interface Web)
-    └── lions.html       # Aplicação Single Page (SPA)
+    ├── js/
+    │   ├── app.js       # Lógica principal da aplicação
+    │   └── config.js    # Configurações do frontend
+    ├── lions.html       # Aplicação Single Page (SPA)
+    ├── manifest.json    # Manifesto PWA
+    └── sw.js            # Service Worker
 ```
 
 ## 🛠️ Como Rodar o Projeto
