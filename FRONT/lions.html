@@ -173,6 +173,16 @@
             -moz-appearance: textfield;
             appearance: textfield;
         }
+
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 transition-colors duration-500 min-h-screen" id="main-body">
@@ -202,21 +212,21 @@
     </style>
 
     <!-- Navbar Superior -->
-    <header id="header" class="px-6 py-4 flex justify-between items-center border-b bg-white border-slate-200 shadow-sm sticky top-0 z-10 transition-colors duration-500">
-        <div class="flex items-center gap-2">
+    <header id="header" class="px-6 py-4 flex justify-between items-center border-b bg-white border-slate-200 shadow-sm sticky top-0 z-10 transition-colors duration-500 overflow-x-auto no-scrollbar">
+        <div class="flex items-center gap-2 flex-shrink-0">
             <button id="back-to-hub-btn" class="hidden p-2 rounded-lg text-slate-500 hover:bg-slate-100 transition-colors mr-2">
                 <i data-lucide="arrow-left" class="w-5 h-5"></i>
             </button>
             <div id="logo-icon-bg" class="p-2 rounded-lg bg-indigo-100 text-indigo-700 transition-colors duration-500">
                 <i data-lucide="layout-dashboard" id="logo-icon"></i>
             </div>
-            <div>
-                <h1 class="font-bold text-lg leading-tight">LionsDash</h1>
-                <p id="mode-text" class="text-xs text-slate-500">Dashboard de Planeamento</p>
+            <div class="min-w-0">
+                <h1 class="font-bold text-lg leading-tight truncate max-w-[200px] sm:max-w-none">LionsDash</h1>
+                <p id="mode-text" class="text-xs text-slate-500 truncate">Dashboard de Planeamento</p>
             </div>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3 flex-shrink-0">
             <button id="settings-btn" class="p-2 rounded-full text-slate-500 hover:bg-slate-100 transition-colors">
                 <i data-lucide="settings" class="w-5 h-5"></i>
             </button>
@@ -873,7 +883,7 @@
             // Global Settings
             shopMode: false,
             theme: typeof CONFIG !== 'undefined' ? CONFIG.DEFAULT_THEME : 'dark',
-            appName: typeof CONFIG !== 'undefined' ? CONFIG.APP_NAME : 'SmartPrep',
+            appName: typeof CONFIG !== 'undefined' ? CONFIG.APP_NAME : 'LionsDash',
             appSlogan: typeof CONFIG !== 'undefined' ? CONFIG.APP_SLOGAN : 'Dashboard',
             roundValues: typeof CONFIG !== 'undefined' ? CONFIG.DEFAULT_ROUND_VALUES : false,
             enableSuggestions: typeof CONFIG !== 'undefined' ? CONFIG.DEFAULT_ENABLE_SUGGESTIONS : true,
